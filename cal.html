@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loan Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Back to Home Button -->
+  <a href="index.html" class="back-btn">← Back to Home</a>
+
+  <div class="calculator">
+    <h2>Loan Calculator</h2>
+
+    <div class="form-group">
+      <label for="amount">Loan Amount (₹):</label>
+      <input type="number" id="amount" placeholder="Enter amount" />
+    </div>
+
+    <div class="form-group">
+      <label for="interest">Rate of Interest (%):</label>
+      <input type="range" id="interest" min="1" max="20" step="0.1" />
+      <span id="interest-value">10%</span>
+    </div>
+
+    <div class="form-group">
+      <label for="years">Years:</label>
+      <input type="number" id="years" placeholder="Duration in years" />
+    </div>
+
+    <button onclick="calculateLoan()">Calculate</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const interestSlider = document.getElementById("interest");
+    const interestValue = document.getElementById("interest-value");
+
+    interestSlider.addEventListener("input", () => {
+      interestValue.textContent = interestSlider.value + "%";
+    });
+
+    function calculateLoan() {
+      const amount = parseFloat(document.getElementById("amount").value);
+      const interest = parseFloat(document.getElementById("interest").value);
+      const years = parseFloat(document.getElementById("years").value);
+
+      if (isNaN(amount) || isNaN(interest) || isNaN(years)) {
+        document.getElementById("result").innerHTML = "Please fill all fields correctly.";
+        return;
+      }
+
+      const monthlyInterest = interest / 100 / 12;
+      const payments = years * 12;
+      const x = Math.pow(1 + monthlyInterest, payments);
+      const monthly = (amount * x * monthlyInterest) / (x - 1);
+
+      if (isFinite(monthly)) {
+        document.getElementById("result").innerHTML =
+          `Monthly Payment: ₹${monthly.toFixed(2)}<br>
+           Total Payment: ₹${(monthly * payments).toFixed(2)}<br>
+           Total Interest: ₹${((monthly * payments) - amount).toFixed(2)}`;
+      } else {
+        document.getElementById("result").innerHTML = "Calculation error. Please check values.";
+      }
+    }
+  </script>
+</body>
+</html>

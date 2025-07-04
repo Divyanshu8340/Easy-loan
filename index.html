@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bank Loan Offers</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Loan Calculator Button -->
+  <a href="cal.html" class="loan-btn">💰 Loan Calculator</a>
+
+  <!-- Search Bar -->
+  <input type="text" id="search-input" placeholder="Search banks or offers..." />
+
+  <!-- Filter Buttons -->
+  <div class="filter-buttons">
+    <button onclick="filterByCategory('all')">All</button>
+    <button onclick="filterByCategory('home')">Home</button>
+    <button onclick="filterByCategory('personal')">Personal</button>
+    <button onclick="filterByCategory('education')">Education</button>
+    <button onclick="filterByCategory('car')">Car</button>
+    <button onclick="filterByCategory('business')">Business</button>
+  </div>
+
+  <!-- Bank Sections Will Appear Here -->
+  <div id="bank-sections"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
